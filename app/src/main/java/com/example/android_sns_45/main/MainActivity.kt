@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
 
         System.out.println("hi")
         //main
-        //And_studio
+        //hello___WWWW
     }
 }

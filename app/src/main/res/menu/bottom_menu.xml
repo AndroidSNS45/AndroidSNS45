@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:title="홈"
+        android:icon="@drawable/ic_goto_home"/>
+    <item
+        android:id="@+id/positngFragment"
+        android:title="글쓰기"
+        android:icon="@drawable/ic_writing_post"/>
+
+    <item
+        android:id="@+id/myPageFragment"
+        android:title="내 정보"
+        android:icon="@drawable/ic_goto_myinfo"/>
+</menu>

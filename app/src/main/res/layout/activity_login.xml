@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/signinlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/imptnametext"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/efrebeca"
+            android:gravity="center"
+            android:text="HSNS"
+            android:textColor="#000000"
+            android:textSize="40dp" />
+
+        <EditText
+            android:id="@+id/emailedittext"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginBottom="0dp"
+            android:hint="email"></EditText>
+
+        <EditText
+            android:id="@+id/pwdedittext"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="0dp"
+            android:hint="password"></EditText>
+
+        <Button
+            android:id="@+id/loginbutton"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="로그인"
+            android:textColor="@color/black"></Button>
+
+        <Button
+            android:id="@+id/assignbutton"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="회원가입"
+
+
+            android:textColor="@color/black"></Button>
+
+        <Button
+            android:id="@+id/facebookbutton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/signin_facebook"
+            android:background="@drawable/btn_signin_facebook"
+
+            android:textColor="@color/black"></Button>
+
+        <Button
+            android:id="@+id/gogglebutton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="35dp"
+            android:text="@string/signin_google"
+            android:background="@drawable/btn_signin_google"
+            android:textColor="@color/black"></Button>
+
+    </LinearLayout>
+</RelativeLayout>

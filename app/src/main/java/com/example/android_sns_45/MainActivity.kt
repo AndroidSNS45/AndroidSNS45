@@ -1,7 +1,9 @@
 package com.example.android_sns_45
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
@@ -38,7 +40,11 @@ class MainActivity : AppCompatActivity() {
         val navigationview: BottomNavigationView = findViewById(R.id.navigationView)
         navigationview.setOnItemSelectedListener { item ->
             when(item.itemId){
-                R.id.positngFragment -> setFragment(TAG_POSTING, PostingFragment())
+                R.id.positngFragment -> {
+                   // var intent = Intent(this,WritingActivity::class.java)
+                  //  startActivity(intent)
+                    //Toast.makeText(applicationContext, "글쓰기", Toast.LENGTH_SHORT).show()
+                }
                 R.id.homeFragment -> setFragment(TAG_HOME, PostingFragment())
                 R.id.myPageFragment -> setFragment(TAG_MY_INFO, MyInfoFragment())
             }

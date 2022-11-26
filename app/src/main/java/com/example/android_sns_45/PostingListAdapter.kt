@@ -19,6 +19,7 @@ class PostingListAdapter (val itemList : List<PostingData>) :
 
     override fun onBindViewHolder(holder: PostingViewHolder, position: Int) {
         val item = itemList[position]
+
         holder.apply { //viewholder에 apply함수 사용하여 각각의 데이터를 적용시켜줌
             bind(item)
         }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Android_SNS_45</string>
+    <string name="signin_google">Google login</string>
+    <string name="signin_facebook">Facebook login</string>
     <string name="title_activity_writing">WritingActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

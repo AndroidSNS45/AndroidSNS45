@@ -76,17 +76,17 @@
 
             android:textColor="@color/black"></Button>
 
-        <Button
-            android:id="@+id/gogglebutton"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="35dp"
-            android:text="@string/signin_google"
-            android:background="@drawable/btn_signin_google"
-            android:textColor="@color/black"></Button>
+            android:text="GOOGLE LOGIN"
+
+            android:textColor="@color/black"></com.google.android.gms.common.SignInButton>
 
     </LinearLayout>
 </RelativeLayout>

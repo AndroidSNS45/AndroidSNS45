@@ -11,4 +11,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="deafault_web_client_id" />
+    <string name="facebook_app_id">1132751104046693</string>
+    <string name="fb_login_protocol_scheme">fb1132751104046693</string>
+    <string name="facebook_client_token">7103e14251bf9126caebaaea2302021f</string>
+
 </resources>

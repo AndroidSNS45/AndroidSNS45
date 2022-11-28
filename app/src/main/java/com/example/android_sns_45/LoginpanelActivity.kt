@@ -1,32 +1,63 @@
 package com.example.android_sns_45
 
 
-import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import android.widget.EditText
-import android.os.Bundle
-import com.example.android_sns_45.R
-import com.google.firebase.database.FirebaseDatabase
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Button
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.DataSnapshot
-import com.example.android_sns_45.MainActivity
-import com.google.firebase.database.DatabaseError
+import android.widget.EditText
 import android.widget.Toast
-import com.example.android_sns_45.SigninActivity
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_login.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.util.*
 
-class LoginpanelActivity : AppCompatActivity() {
+class LoginpanelActivity() : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
     private lateinit var mFirebaseAuth //파이어베이스 인증
             : FirebaseAuth
     private lateinit var mDatabaseRef //실시간 데이터 베이스
             : DatabaseReference
+    private var mEtEmail: EditText? = null
+    private var mEtPwd //로그인 입력 필드
+            : EditText? = null
+    private var btn_google //구글 로그인 버튼
+            : SignInButton? = null
+    private var auth //파이어베이스 인증
+            : FirebaseAuth? = null
+    private var callbackManager : CallbackManager? =null
+    private val googleApiClient: GoogleApiClient? = null
+    private var googleSignInClient: GoogleSignInClient? = null
 
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -71,12 +102,10 @@ class LoginpanelActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("sns45")
-        mEtEmail = findViewById(R.id.emailedittext)
-        mEtPwd = findViewById(R.id.pwdedittext)
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("sns45")
         //
-         login_button.setOnClickListener{
+        login_button.setOnClickListener{
 
             facebooklogin()
         }
@@ -94,34 +123,6 @@ class LoginpanelActivity : AppCompatActivity() {
                 val intent = googleSignInClient!!.signInIntent
                 startActivityForResult(intent, REQ_SIGN_GOOGLE)
             })
-        val btn_login = findViewById<Button>(R.id.loginbutton)
-        btn_login.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View) {
-                //로그인 요청
-                val strEmail = mEtEmail?.getText().toString() //회원가입 입력필드에 입력한 값을 가져온다.
-                val strPwd = mEtPwd?.getText().toString()
-                mFirebaseAuth!!.signInWithEmailAndPassword(strEmail, strPwd)
-                    .addOnCompleteListener(this@LoginpanelActivity, OnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            //로그인 성공시 MainActivity로 화면 전환
-                            val intent = Intent(this@LoginpanelActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish() //현재 액티비티 파괴
-                        } else {
-                            Toast.makeText(this@LoginpanelActivity, "로그인실패", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    })
-            }
-        })
-        val btn_register = findViewById<Button>(R.id.assignbutton)
-        btn_register.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View) {
-                //회원가입 화면이동
-                val intent = Intent(this@LoginpanelActivity, SigninActivity::class.java)
-                startActivity(intent)
-            }
-        })
         //printHashKey()
         //callbackManager = callbackManager.Factory.create()
     }
@@ -146,27 +147,27 @@ class LoginpanelActivity : AppCompatActivity() {
     fun facebooklogin(){
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"))
 
-            LoginManager.getInstance()
-                .registerCallback(callbackManager,object : FacebookCallback<LoginResult>{
-                    override fun onCancel() {
+        LoginManager.getInstance()
+            .registerCallback(callbackManager,object : FacebookCallback<LoginResult>{
+                override fun onCancel() {
 
-                    }
+                }
 
-                    override fun onError(error: FacebookException) {
+                override fun onError(error: FacebookException) {
 
-                    }
+                }
 
-                    override fun onSuccess(result: LoginResult) {
-                        handleFacebookAccessToken(result?.accessToken)
-                    }
+                override fun onSuccess(result: LoginResult) {
+                    handleFacebookAccessToken(result?.accessToken)
+                }
 
-                })
+            })
     }
     fun handleFacebookAccessToken(token :AccessToken?){
         var credential = FacebookAuthProvider.getCredential(token?.token!!)
         auth?.signInWithCredential(credential)
             ?.addOnCompleteListener {
-                task ->
+                    task ->
                 if(task.isSuccessful){
                     //login
                     moveMainpage(task.result?.user)

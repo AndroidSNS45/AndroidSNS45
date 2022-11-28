@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 array.clear()
                 for(data in snapshot.children) {
-                    if(data.child("writerUid").value as String? == auth.currentUser!!.uid) {
+
                         val email = data.child("emailId").value as String?
                         val content = data.child("content").value as String?
                         val id = data.child("id").value as String?
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                         val writerUid = data.child("writerUid").value as String
 
                         array.add(PostingData(writerUid,email,id,content,time,epoch))
-                    }
+
                 }
                 if(array.size > 1) {
                     array.sortWith(Comparator { p0, p1 -> p0!!.epoch!!.toLong().compareTo(p1!!.epoch!!.toLong()) * -1})

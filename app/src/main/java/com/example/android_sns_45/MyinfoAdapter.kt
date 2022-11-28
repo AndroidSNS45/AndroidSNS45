@@ -5,17 +5,13 @@ import android.content.Context
 import android.graphics.Point
 import android.util.DisplayMetrics
 import android.view.Display
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
-import com.example.android_sns_45.databinding.ActivityMyinfoBinding
 
-class MyinfoAdapter(private val viewModel: ViewModel) : RecyclerView.Adapter<MyinfoAdapter.ViewHolder>(){
+class MyinfoAdapter(val imageView: ImageView) : RecyclerView.Adapter<MyinfoAdapter.ViewHolder>(){
     inner class ViewHolder(var imageView: ImageView) : RecyclerView.ViewHolder(imageView){
         fun setContents(pos:Int) {
             val k = pos

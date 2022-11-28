@@ -36,7 +36,8 @@
             android:layout_marginLeft="80dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="0dp"
-            android:hint="password"></EditText>
+            android:hint="password"
+            android:inputType="textPassword"></EditText>
 
         <Button
             android:id="@+id/loginbutton"
@@ -62,28 +63,27 @@
 
             android:textColor="@color/black"></Button>
 
-        <Button
-            android:id="@+id/facebookbutton"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/signin_facebook"
-            android:background="@drawable/btn_signin_facebook"
+            android:text="Facebook으로 로그인"
 
-            android:textColor="@color/black"></Button>
+            ></com.facebook.login.widget.LoginButton>
 
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_google"
+            android:id="@+id/google_sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="35dp"
-            android:text="GOOGLE LOGIN"
+            android:text="@string/signin_google"
 
             android:textColor="@color/black"></com.google.android.gms.common.SignInButton>
 

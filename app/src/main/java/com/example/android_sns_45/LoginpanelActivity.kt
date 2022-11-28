@@ -57,7 +57,7 @@ class LoginpanelActivity() : AppCompatActivity(), GoogleApiClient.OnConnectionFa
     private var callbackManager : CallbackManager? =null
     private val googleApiClient: GoogleApiClient? = null
     private var googleSignInClient: GoogleSignInClient? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

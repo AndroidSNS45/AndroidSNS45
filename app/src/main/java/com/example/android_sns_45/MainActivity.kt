@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
                         val imageUrl = data.child("imageUrl").value as String?
                         array.add(PostingData(writerUid,email,id,content,time,epoch,imageUrl))
 
+
+
                 }
                 if(array.size > 1) {
                     array.sortWith(Comparator { p0, p1 -> p0!!.epoch!!.toLong().compareTo(p1!!.epoch!!.toLong()) * -1})
